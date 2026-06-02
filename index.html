@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robot Coding & Design Environment</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "codemirror/": "https://esm.sh/codemirror@6/",
+      "codemirror": "https://esm.sh/codemirror@6",
+      "nipplejs": "https://esm.sh/nipplejs@0.9.0"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <div id="left">
+      <div class="panel">
+        <div class="panel-header">Project</div>
+        <div class="panel-body" id="file-list"></div>
+        <div class="panel-footer">
+          <button id="new-file">New File</button>
+          <button id="new-project">New Project</button>
+          <button id="import-zip">Import .zip</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">Board & Language</div>
+        <div class="panel-body form-grid">
+          <label>Platform
+            <select id="platform-select">
+              <option value="arduino">Arduino (AVR)</option>
+              <option value="esp32">ESP32</option>
+              <option value="esp8266">ESP8266</option>
+              <option value="raspi-pico">Raspberry Pi Pico</option>
+              <option value="generic">Generic MCU</option>
+            </select>
+          </label>
+          <label>Language
+            <select id="lang-select">
+              <option value="cpp">C / C++ (Arduino)</option>
+              <option value="python">MicroPython</option>
+              <option value="python3">Python 3 (Simulation)</option>
+              <option value="javascript">JavaScript (Node)</option>
+            </select>
+          </label>
+          <label>Framework / Board
+            <select id="board-select">
+              <option value="uno">Arduino Uno</option>
+              <option value="mega">Arduino Mega</option>
+              <option value="esp32dev">ESP32 Dev</option>
+              <option value="esp12e">ESP8266 (ESP-12E)</option>
+              <option value="pico">Raspberry Pi Pico</option>
+            </select>
+          </label>
+        </div>
+        <div class="panel-footer">
+          <button id="build-btn" class="primary">Build</button>
+          <button id="upload-btn">Upload / Flash</button>
+          <button id="run-btn">Run (Sim)</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">Console</div>
+        <pre id="console" class="console"></pre>
+      </div>
+    </div>
+
+    <div id="center">
+      <div id="editor-toolbar">
+        <div class="editor-actions">
+          <button id="save-btn">Save</button>
+          <button id="format-btn">Format</button>
+          <select id="file-type-indicator" disabled></select>
+        </div>
+        <div class="editor-title" id="current-file">untitled.ino</div>
+      </div>
+      <div id="editor"></div>
+    </div>
+
+    <div id="right">
+      <div class="panel">
+        <div class="panel-header">Robot Designer</div>
+        <div class="panel-body" id="designer-root">
+          <div id="palette">
+            <div class="p-item" data-type="base">Base</div>
+            <div class="p-item" data-type="wheel">Wheel</div>
+            <div class="p-item" data-type="servo">Servo</div>
+            <div class="p-item" data-type="arm">Arm</div>
+            <div class="p-item" data-type="gripper">Gripper</div>
+            <div class="p-item" data-type="sensor">Sensor</div>
+          </div>
+          <canvas id="designer-canvas" width="600" height="400"></canvas>
+          <div id="designer-controls">
+            <!-- Enhanced controls: Play / Step / Speed + Import/Export handled dynamically by robotDesigner.js -->
+            <div style="display:flex;gap:8px;align-items:center"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">Code Templates</div>
+        <div class="panel-body" id="templates">
+          <button class="tpl" data-lang="cpp" data-name="blink">Blink (Arduino)</button>
+          <button class="tpl" data-lang="python" data-name="micropython-blink">Blink (MicroPython)</button>
+          <button class="tpl" data-lang="python3" data-name="robot-sim">Robot Sim (Python)</button>
+          <button class="tpl" data-lang="javascript" data-name="node-serial">Node Serial Example</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="credit-footer" aria-hidden="false">
+    Developed by Siyabonga B Phakathi of The Voice &amp; Eye of Bhambatha Inc. — websim: <a href="https://websim.io/@whisperinggalaxyd" target="_blank" rel="noopener">@whisperinggalaxyd</a> — Facebook: <a href="https://www.facebook.com/@C.Datoxic.P" target="_blank" rel="noopener">https://www.facebook.com/@C.Datoxic.P</a>
+  </footer>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

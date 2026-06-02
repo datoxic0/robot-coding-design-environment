@@ -1,0 +1,75 @@
+:root{
+  --bg:#0f1720;
+  --panel:#0b1220;
+  --muted:#9aa6b2;
+  --accent:#1ea7fd;
+  --card:#0f1a24;
+  --footer-height:64px;
+  --footer-gap:28px; /* extra safe gap so content won't touch footer */
+}
+*{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+html,body,#app{height:100%;margin:0;background:linear-gradient(180deg,#08111a, #041018);color:#e6eef3}
+/* ensure enough reserved space so fixed footer never overlaps content */
+body{padding-bottom:calc(var(--footer-height) + var(--footer-gap) + env(safe-area-inset-bottom));} /* reserved space for footer to avoid overlap and respect device safe area */
+
+#app{display:flex;gap:12px;padding:10px}
+#left,#center,#right{display:flex;flex-direction:column;gap:12px}
+#left{width:260px}
+#right{width:360px}
+#center{flex:1;min-width:420px}
+.panel{background:var(--card);border-radius:8px;padding:8px;box-shadow:0 4px 14px rgba(2,6,23,0.6)}
+.panel-header{font-weight:600;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.03);margin-bottom:8px}
+.panel-body{padding:6px 8px;min-height:40px}
+.panel-footer{display:flex;gap:8px;padding-top:8px}
+button{background:#0e1620;color:var(--muted);border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:6px;cursor:pointer}
+button.primary{background:linear-gradient(90deg,var(--accent),#5de3ff);color:#041018;border:none}
+#file-list{display:flex;flex-direction:column;gap:6px}
+.file{padding:8px;border-radius:6px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+.file .name{color:#dceefc}
+.file small{color:var(--muted)}
+#editor-toolbar{display:flex;align-items:center;justify-content:space-between;padding:6px 8px}
+#editor{height:68vh;border-radius:8px;overflow:hidden}
+#console{height:120px;background:#06090b;border-radius:6px;padding:8px;color:#bfeafc;overflow:auto}
+.form-grid{display:flex;flex-direction:column;gap:8px}
+.form-grid label{font-size:13px;color:var(--muted)}
+#designer-root{display:flex;flex-direction:column;gap:8px}
+#palette{display:flex;gap:6px;flex-wrap:wrap}
+.p-item{background:#07121a;padding:6px 8px;border-radius:6px;cursor:grab;color:#9fd8ff}
+#designer-canvas{background:linear-gradient(180deg,#061017,#041018);border-radius:6px;border:1px solid rgba(255,255,255,0.02)}
+#designer-controls{display:flex;gap:8px;justify-content:space-between;padding-top:6px}
+#templates{display:flex;flex-direction:column;gap:6px}
+.tpl{background:#081218;padding:8px;border-radius:6px;text-align:left;color:#aee7ff}
+.editor-title{font-weight:600;color:#cfeefe}
+.console{font-family:monospace;font-size:12px;margin-bottom:88px} /* ensure console content isn't covered by fixed footer */
+
+/* Footer anchored flush to viewport bottom, spans full width with safe insets,
+   visually separated but does not overlap content due to body padding above */
+#credit-footer{
+  position:fixed;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  height:var(--footer-height);
+  line-height:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(4,12,16,0.92);
+  color:var(--muted);
+  padding:12px;
+  border-radius:10px;
+  font-size:12px;
+  border:1px solid rgba(255,255,255,0.03);
+  max-width:calc(100% - 24px);
+  text-align:center;
+  box-shadow:0 6px 18px rgba(0,0,0,0.5);
+  z-index:999;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  pointer-events:auto;
+}
+#credit-footer a{color:#9fe7ff;text-decoration:none}
+
+/* ensure scrollable panels and console leave space for footer dynamically */
+.console{font-family:monospace;font-size:12px;padding-bottom:calc(var(--footer-height) + 8px)} /* keep visible content above footer; use padding so inner scroll area respects footer */
